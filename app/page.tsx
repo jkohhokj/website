@@ -23,10 +23,6 @@ export const current_projects = [
 
 
 
-interface Props {
-    text: string;
-    className?: string;
-} 
 
 function Introduction(){
 

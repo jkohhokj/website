@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const App: React.FC = () => {
-  const [isDark, setIsDark] = useState<boolean>(getTheme());
+  const [isDark] = useState<boolean>(getTheme());
   const loadingRef = useRef<HTMLDivElement>(null);
 
 function getTheme(): boolean {
@@ -19,9 +19,9 @@ function getTheme(): boolean {
 
 
   // This function sets the theme in localStorage
-  function setTheme(value: boolean) {
-    localStorage.setItem('dark', JSON.stringify(value));
-  }
+//   function setTheme(value: boolean) {
+//     localStorage.setItem('dark', JSON.stringify(value));
+//   }
 
   // Toggles the theme between dark and light mode
 //   const toggleTheme = () => {
