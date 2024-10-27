@@ -5,7 +5,7 @@ interface NavLink {
 
 const headerNavLinks: NavLink[] = [
   { href: '/', title: 'Home' },
-  { href: '/blog', title: 'Blog' },
+  { href: 'https://blog.jkoh.dev', title: 'Blog' },
   { href: '/projects', title: 'Projects' },
 
 ]
