@@ -1,0 +1,325 @@
+---
+title: 'Zig Programming Language Journey Beginning'
+date: '2024-07-14'
+tags: ['technical']
+draft: false
+summary: 'Zig is a general-purpose programming language and toolchain for maintaining robust, optimal, and reusable software.'
+---
+
+# Description
+
+> Zig is a general-purpose programming language and toolchain for maintaining **robust**, **optimal**, and **reusable** software that has no hidden control flow, no hidden memory allocations, and no preprocessor.
+
+Similar to C, Zig does not employ garbage collection; instead, it relies on allocators for memory management, contrasting with the manual memory management approach in C.
+
+## Projects:
+
+- [x] RSA implementation
+- [x] Linked lists
+- [x] Virtual Machine
+- Obfuscated CTF challenge
+- PRNG
+- Brainfuck Compiler
+- Sockets Program
+- Blockchain Authentication Service
+- Ray Tracing Emulator
+- Serial Service for TM4C123GXL
+- Text Editor
+- Windows Tiling Manager
+- CHIP-8 Emulator
+- OS
+
+## Why?
+
+I hope that by learning Zig I'll be able to learn low-level computer systems without worrying about unnecessarily fickle memory mistakes. 
+
+Additionally, Zig is backwards compatible with C and people have been speculating that it will replace Zig on embedded systems.
+
+## Little Computer 3 Virtual Machine
+
+When I think about virtual machines my first thought goes to the emulated hardware ones, the VMware and VirtualBox type of VMs, but there's another type of VM that's incredibly commonplace.
+Language VMs like JVM and the Python interpretor are essential for creating runtime envionments that allow high level languages run without the need for a separate compiler running native hardware.
+I wrote a virtual machine for the LC3 virtual machine that takes a binary file written in LC3 assembly and runs it.
+
+The main part of this challenge is simply implementing all the 12 instructions and 6 trap codes. There is also the problem of trying to get Zig's terminal into raw mode but with such little/outdated documentation of TUIs in Zig, I decided to just skip it for now.
+
+A key difference between C and Zig is that Zig is exetremely careful about type safety. You see, in C when we want to do something like this: `uint + int => uint` we can do that with minimal casting.
+But in Zig, we need to first bit cast the uint into an int, because an int cannot hold all the possible values of a uint of the same size. Then we need to do the operation. Then bit cast the int back into the uint.
+When this happens enough times, the code gets really messy and is flooded with `@as(i16,@bitCast(value))`. However, this is exactly what makes Zig so safe ("safe").
+
+I also added unit testing for all the instruction calls because I'm a good programmer.
+
+[Source](https://github.com/jkohhokj/zig-projects/tree/main/lc3-zig)
+
+Example of `character_counter.obj`:
+```
+zig run -lc lc3-zig/src/main.zig -- lc3-zig/images/programs/character_counter/character_counter.obj release
+Starting the VM...
+Character Counter - Copyleft (c) Dennis Ideler.
+Please enter a line of lower case text.
+asdfasdfqwertyuiopasdfasdf
+asdfasdfqwertyuiopasdfasdf
+a:4
+b:0
+c:0
+d:4
+e:1
+f:4
+g:0
+h:0
+i:1
+j:0
+k:0
+l:0
+m:0
+n:0
+o:1
+p:1
+q:1
+r:1
+s:4
+t:1
+u:1
+v:0
+w:1
+x:0
+y:1
+z:0
+HALT
+```
+
+Example with debug prints on `hello2.obj`:
+```
+zig run -lc lc3-zig/src/main.zig -- lc3-zig/images/hello2.obj
+File start: 3000
+Filename: /home/wslappendix/.cache/zig/o/88a2d62dfdda1e6f7ede7cb12b4a097b/main lc3-zig/images/hello2.obj
+Starting the VM...
+Breakdown of instruction: 1110000000000101 hardware.vm.Instruction.OP_LEA
+Registers in 0x: { 3007, 0, 0, 0, 0, 0, 0, 0, 3002, 1 }
+Breakdown of instruction: 0010001000010011 hardware.vm.Instruction.OP_LD
+Registers in 0x: { 3007, 5, 0, 0, 0, 0, 0, 0, 3003, 1 }
+Breakdown of instruction: 1111000000100010 hardware.vm.Instruction.OP_TRAP
+Hello, World!
+Registers in 0x: { 3007, 5, 0, 0, 0, 0, 0, 3004, 3004, 1 }
+Breakdown of instruction: 0001001001111111 hardware.vm.Instruction.OP_ADD
+Registers in 0x: { 3007, 4, 0, 0, 0, 0, 0, 3004, 3005, 1 }
+Breakdown of instruction: 0000001111111101 hardware.vm.Instruction.OP_BR
+Registers in 0x: { 3007, 4, 0, 0, 0, 0, 0, 3004, 3003, 1 }
+Breakdown of instruction: 1111000000100010 hardware.vm.Instruction.OP_TRAP
+Hello, World!
+Registers in 0x: { 3007, 4, 0, 0, 0, 0, 0, 3004, 3004, 1 }
+Breakdown of instruction: 0001001001111111 hardware.vm.Instruction.OP_ADD
+Registers in 0x: { 3007, 3, 0, 0, 0, 0, 0, 3004, 3005, 1 }
+Breakdown of instruction: 0000001111111101 hardware.vm.Instruction.OP_BR
+Registers in 0x: { 3007, 3, 0, 0, 0, 0, 0, 3004, 3003, 1 }
+Breakdown of instruction: 1111000000100010 hardware.vm.Instruction.OP_TRAP
+Hello, World!
+Registers in 0x: { 3007, 3, 0, 0, 0, 0, 0, 3004, 3004, 1 }
+Breakdown of instruction: 0001001001111111 hardware.vm.Instruction.OP_ADD
+Registers in 0x: { 3007, 2, 0, 0, 0, 0, 0, 3004, 3005, 1 }
+Breakdown of instruction: 0000001111111101 hardware.vm.Instruction.OP_BR
+Registers in 0x: { 3007, 2, 0, 0, 0, 0, 0, 3004, 3003, 1 }
+Breakdown of instruction: 1111000000100010 hardware.vm.Instruction.OP_TRAP
+Hello, World!
+Registers in 0x: { 3007, 2, 0, 0, 0, 0, 0, 3004, 3004, 1 }
+Breakdown of instruction: 0001001001111111 hardware.vm.Instruction.OP_ADD
+Registers in 0x: { 3007, 1, 0, 0, 0, 0, 0, 3004, 3005, 1 }
+Breakdown of instruction: 0000001111111101 hardware.vm.Instruction.OP_BR
+Registers in 0x: { 3007, 1, 0, 0, 0, 0, 0, 3004, 3003, 1 }
+Breakdown of instruction: 1111000000100010 hardware.vm.Instruction.OP_TRAP
+Hello, World!
+Registers in 0x: { 3007, 1, 0, 0, 0, 0, 0, 3004, 3004, 1 }
+Breakdown of instruction: 0001001001111111 hardware.vm.Instruction.OP_ADD
+Registers in 0x: { 3007, 0, 0, 0, 0, 0, 0, 3004, 3005, 2 }
+Breakdown of instruction: 0000001111111101 hardware.vm.Instruction.OP_BR
+Registers in 0x: { 3007, 0, 0, 0, 0, 0, 0, 3004, 3006, 2 }
+Breakdown of instruction: 1111000000100101 hardware.vm.Instruction.OP_TRAP
+HALT
+```
+
+Here we can clearly see the TRAP call printing out the string "Hello, World!".
+The ADD is decrementing our counter in R0 from 5 to 0.
+The BR is checking if our zero flag has been checked in condition code register, basically has our counter reached 0.
+
+## Doubly Linked List in Zig
+
+6/29/24
+
+[Source](https://github.com/jkohhokj/zig-projects/blob/main/linked_list.zig)
+
+```zig
+Print my list:
+3  133  44  44  44  42
+Print my list BACKWARDS:
+42  44  44  44  133  3
+
+Inline reversing my list...
+Print reversed list:
+42  44  44  44  133  3
+Print reversed list BACKWARDS (so should be normal):
+3  133  44  44  44  42
+
+Popping the last element...
+This is my popped node: LinkedList.Node{ .value = 3, .next = null, .prev = null }
+And the list looks like this now:
+42  44  44  44  133
+133  44  44  44  42
+
+Let's get rid of 133
+42  44  44  44
+44  44  44  42
+
+Let's get rid of 100 (it doesn't exist)
+I errored!!
+42  44  44  44
+44  44  44  42
+
+How many 44's are there?
+There are 3 44's.
+
+Let's remove all the 44's
+42
+42
+Yey Linked Lists :)
+```
+
+
+## Zig Language and Standard Library
+
+4/3/2024
+Started learning the Zig language and parts of the standard library.
+
+I learned about the combinations of types which include:
+
+- var vs const
+- optional values (`?`)
+- error unions (`!`)
+- single vs many-item pointers (`*` and `[*]`)
+- slices of arrays (`[]` and `[x..y]`)
+- sentinel termination (`[n:null]`)
+
+And the new concept of `comptime`, a method of running code at compilation time.
+
+
+In addition to that there is the type `anytype` that includes compile-time reflection, increasing the dynamic nature of the language through metaprogramming compared to the very strictly-typed implementation of C.
+
+# Discrete Structure Projects
+
+## Modular arithemic
+
+I implemented the Extended Euclidean Algorithm to find the Bezier Coefficients and the GCD of 2 integers in $O(\log_2(n))$ time.
+
+```bash
+wslappendix@LAPTOP:~/zig-dir/mathCode/src$ echo $((11*963852)) $((13*963852)) | xargs ./main.zig
+   a   |   b   |   q   |   r   |   s   |   t
+12530076 | 10602372 | 1 | 1927704 | 1 | -1 |
+10602372 | 1927704 | 5 | 963852 | -5 | 6 |
+1927704 | 963852 | 2 | 0 | 11 | -13 |
+gcd is 963852
+bezier coeffs are s=-5, t=6: -5*12530076+6*10602372=963852
+```
+
+You can find the code [here](https://github.com/jkohhokj/zig-projects/blob/main/discrete-structures.zig).
+
+## RSA Suite:
+
+Simplified RSA Algorithm:
+
+- Choose $p = 3$ and $q = 11$
+- Compute $n = p * q = 3 * 11 = 33$
+- Compute $\phi (n) = (p - 1) * (q - 1) = 2 * 10 = 20$
+- Choose $e$ such that $1 < e < \phi (n)$ and $e$ and $\phi (n)$ are coprime. Let $e = 7$
+- Compute a value for $d$ such that $(d * e) \% \phi (n) = 1$. One solution is $d = 3 [(3 * 7) \% 20 = 1]$
+- Public key is (e, n) => (7, 33)
+- Private key is (d, n) => (3, 33)
+- The encryption of $m = 2$ is $c = 27 % 33 = 29$
+- The decryption of $c = 29$ is $m = 293 % 33 = 2$
+
+Source [UT Austin](https://www.cs.utexas.edu/users/mitra/honors/soln.html).
+
+So I based my implementation off that simplified schema but adding discrete math to ensure the numbers were generated in polynomial time instead of simply brute forcing numbers. This allowed me to generate very large numbers on the order of magnitude of seconds.
+
+Code can be found [here](https://github.com/jkohhokj/zig-projects/blob/main/rsa_suite.zig).
+
+Proper (somewhat) implementation of RSA:
+- 1. Find Euler Polynomial from $3<=n<=7$, the numbers can honestly be arbitrary as long as it doesn't integer overflow.
+- 2. Derive the Mersenne number from the previously obtained Euler Prime.
+- 3. Pick an arbitrarily small prime number for $e$.
+- 4. Solve for $d$ such that $e*d \equiv 1 \% \phi(n)$ by solving for $ae  + b\phi(n) = 1$ and $d \equiv a \% \phi(n)$.
+- 5. Verify using EGCD.
+
+
+### Generating prime numbers ($O(\log n)$ from exponentiation):
+
+```bash
+Generating primes:
+euler prime: 71
+mersenne prime: 2^71-1
+euler prime: 83
+mersenne prime: 2^83-1
+Primes p and q: 2361183241434822606847 9671406556917033397649407
+Proving they are prime:
+   a   |   b   |   q   |   r   |   s   |   t
+9671406556917033397649407 | 2361183241434822606847 | 4096 | 4095 | 1 | -4096
+2361183241434822606847 | 4095 | 576601524159907840 | 2047 | -576601524159907840 | 2361759842958982512641
+4095 | 2047 | 2 | 1 | 1153203048319815681 | -4723519685917965029378
+2047 | 1 | 2047 | 0 | -2361183241434822606847 | 9671406556917033397649407
+gcd is 1
+bezier coeffs are s=1153203048319815681, t=-4723519685917965029378: 1153203048319815681*9671406556917033397649407+-4723519685917965029378*2361183241434822606847=1
+```
+
+### Generating public key ($O(\log n)$ where $n = \phi(p*q)$):
+
+```bash
+euler prime: 47
+mersenne prime: 2^47-1
+
+
+Found the public key exponent
+e, n = 140737488355327   22835963083295358096922901743451763713903689729
+```
+
+### Generating private key ($O(\log n)$ where n = $e$):
+
+```bash
+Finding the private key exponent through inverse mod with egcd
+   a   |   b   |   q   |   r   |   s   |   t
+22835963083295358096913227975711605245683433476 | 140737488355327 | 162259276829214516312945144635391 | 140600015855619 | 1 | -162259276829214516312945144635391
+140737488355327 | 140600015855619 | 1 | 137472499708 | -1 | 162259276829214516312945144635392
+140600015855619 | 137472499708 | 1022 | 103121154043 | 1023 | -165991240196286450188142882962006015
+137472499708 | 103121154043 | 1 | 34351345665 | -1024 | 166153499473115664704455828106641407
+103121154043 | 34351345665 | 3 | 67117048 | 4095 | -664451738615633444301510367281930236
+34351345665 | 67117048 | 511 | 54534137 | -2093569 | 339700991932061805702776253509172992003
+67117048 | 54534137 | 1 | 12582911 | 2097664 | -340365443670677439147077763876454922239
+54534137 | 12582911 | 4 | 4202493 | -10484225 | 1701162766614771562291087309014992680959
+12582911 | 4202493 | 2 | 4177925 | 23066114 | -3742690976900220563729252381906440284157
+4202493 | 4177925 | 1 | 24568 | -33550339 | 5443853743514992126020339690921432965116
+4177925 | 24568 | 170 | 1365 | 5726623744 | -929197827374448881987186999838550044353877
+24568 | 1365 | 17 | 1363 | -97386153987 | 15801806919109145985908199336946272186981025
+1365 | 1363 | 1 | 2 | 103112777731 | -16731004746483594867895386336784822231334902
+1363 | 2 | 681 | 1 | -70317187788798 | 11409616039274437251022666294687410211726049287
+2 | 1 | 2 | 0 | 140737488355327 | -22835963083295358096913227975711605245683433476
+gcd is 1
+bezier coeffs are s=-70317187788798, t=11409616039274437251022666294687410211726049287: -70317187788798*22835963083295358096913227975711605245683433476+11409616039274437251022666294687410211726049287*140737488355327=1
+```
+
+### Generating the full keypair:
+
+```bash
+Found the full keypair:
+e = 140737488355327
+d = 11409616039274437251022666294687410211726049287
+n = 22835963083295358096922901743451763713903689729
+Proving d * e === 1 (mod totient)
+11409616039274437251022666294687410211726049287 * 140737488355327 = 22835963083295358096913227975711605245683433476 * 70317187788798 + 1
+```
+
+### Solving public key from private key without $\phi(n)$ ($O(2^n)$):
+
+### Solving $n$ given public and private key ($O(???)$):
+
+
+Sources:
+[Private Key from Public Key](https://crypto.stackexchange.com/questions/103615/in-rsa-how-to-calculate-the-private-exponent-d-after-choosing-e)
+[Complexity of RSA](https://www.quora.com/What-is-the-complexity-of-RSA-cryptographic-algorithm)
+

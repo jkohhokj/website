@@ -1,0 +1,63 @@
+---
+title: 'Practical Network Penetration Tester (PNPT) Certificate Progress'
+date: '2024-05-02'
+tags: ['technical']
+draft: false
+summary: 'Documentation of my progress studying for the PNPT.'
+---
+
+# Description
+
+Documentation of my progress studying for the PNPT. My goal with this certificate is to learn more about network penetration testing and be able to get work experience, through an internship or part time job, in the cybersecurity field before I graduate university.
+
+Additionally, I plan on tackling more advanced certificates after this such as the CRTO II and OSCP.
+
+Bought the PNPT training course. 2/26/24
+
+Finished the first 3 required courses for the PNPT. 5/6/24
+
+## Practical Ethical Hacking - Complete Course
+
+The PEH goes over the prerequisites for network pentesting which includes
+- Networking: OSI model, TCP/IP, common ports and protocols, and subnetting
+- Linux: file systems, network commands, common services, and Bash scripting
+- Python: conditional statements, control flow, data structures, sockets, and file manipulation
+
+Then we learn about scanning and enumeration with port scanning over common protocols such as HTTP, HTTPS, SMB, and LDAP.
+
+After preliminary port scanning and finding vulnerabilities with nmap and Metasploit, we can exploit the vulnerabilities by generating payloads fron Msfvemon to get a shell.
+
+If we find an open web page this opens up a whole new vector of enumeration like subdomain discovery, subdirectory brute forcing, and finding domain; and attacks like SQL injections, XSS, CSRF, command injection, LFI, RFI, XXE, and broken authentication. This part of the course essentially covers the OWASP Top 10.
+
+After we gain initial access to the network by getting a user's credentials or shell access we can start attacking the Active Directory services, the meat and potatoes of this course, the main target of the certification.
+We set up an Active Directory Lab with 1 Domain Controller, 2 domain admins, 2 local admins, and 2 users then we practice different initial attacks including LLMNR poisoning, SMB relay, IPv6 DNS takeover, and passback attack.
+
+Inside the Active Directory system, we can start enumerating services with tools like Bloodhound and PingCastle. If there are any file sharing services running we could run enum4linux or crackmapexec to find any low hanging fruit.
+Then, once we have enough information about this domain we can exploit vulnerabilities within Kerberos to escalate our privileges and get to the domain controller with Kerberoasting, token impersonation, pass the hash, and credential dumping.
+
+Lastly, we want to maintain access to the system we have compromised, so might want to pivot laterally, generate Golden Tickets, dump credentials, or set up Command & Control systems.
+
+The PEH closes with practice machines to enumerate and exploit, and an overview of debriefing and report writing before sending us on our way to the next 2 courses.
+
+Overall, the course covers a lot of material from basic networking, Linux, and Python scripting to enumerating and exploiting networks and Active Directory. There are plenty of labs and practical examples that help students learn the fundamentals of network security.
+
+## OSINT Fundamentals
+
+The OSINT Fundamentals course covers reverse image searching using tools like Google Lens and Yandex, physical location OSINT using geographic indicators commonly used in Geoguessr, credential OSINT with websites like [Have I Been Pwned](https://haveibeenpwned.com/).
+Additionally, it goes over enumeration on popular social media sites like Instagram, Facebook, Twitter, and Reddit, information automation, and commonly used OSINT frameworks.
+Lastly, the course finishes with a final challenge and case studies.
+
+
+## External Pentest Playbook
+
+The External Pentest Playbook felt the most tailored towards a C-Suite audience and had the least practical implementations of all the courses since it had no labs.
+It mainly just covered the methodologies for attacking common enterprise logins, services, and security features from a blue/purple team perspective. This is probably the most important part of pentesting because it teaches you how to present risk mitigation, vulnerability patching, and issues resolution at both a technical and executive level.
+
+## Finished Training
+
+From reading online resources about cybersecurity exams, the most important part of preparation is having good references and notes. So for my exam preparations I'm going through all of my notes again and making things as concise and complete as I would need like a cheatsheet for the actual exam.
+There is so much Imposter Syndrome that comes along for the ride with this type of solo training because I don't have a reference to how well I understand the material, but the only way to test that is to actually take the exam.
+
+And with that, we have finished the mandatory 3 courses for the PNPT, but before I jump straight into the exam I wanted to at least take a few weeks to peruse the optional courses provided by TCM Sec, the Windows privilege escalation and Linux privilege escalation courses.
+Before starting this course I already had a few years of programming experience and had recently finished studying the first unit of Network+ for around 2 months. So, after almost another 3 months of grinding network pentesting for hundreds of hours, I am literally *dying* to get started on the exam but I know I should pace myself and rush into things.
+Honestly, it feels like such a relief to finally finish the main sections of the course and I'm so nervous and excited. Now comes the homestretch and exam prepping! `\(>~<\)`

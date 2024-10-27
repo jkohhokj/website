@@ -1,0 +1,497 @@
+---
+title: 'The Substitution Game Writeup'
+date: '2021-07-14'
+tags: ['writeup', 'ctf', 'algo']
+draft: false
+summary: 'Complete writeup of The Substitution Game algo challenge from redpwnCTF 2021.'
+---
+
+# The Substitution Game Writeup
+
+Complete writeup of The Substitution Game **algo** challenge from [redpwnCTF 2021](https://ctftime.org/task/16443).
+
+## Description
+
+Enter substitution of form "find => replace", 5 max:
+```
+So we want the `Initial string:` to look like `Target string:`. We can only have direction substitutions ie finding all matches to something else. This one is pretty obvious, it's changing `intial` to `target` for level 1. So if we want `initial => target`.
+`Add another? (y/n) n`
+`--------------------------------------------------------------------------------
+Testing substitutions...`
+`Level passed!`
+```
+
+Ok, so level 1 was easy. If we look at the function `level_1`:
+```python
+def level_1():
+    initial = f'{"0" * randint(0, 20)}initial{"0" * randint(0, 20)}'
+    target = initial.replace('initial', 'target')
+    return (initial, target)
+```
+It's just `initial` padded with random `0`'s and replaced with `target` after the switch so it makes sense.
+
+Level 1 Solution: 
+`initial => target`
+
+### Level 2
+
+Next level is this:
+```python
+def level_2():
+    initial = ''.join(
+        rand.choice(['hello', 'ginkoid']) for _ in range(randint(10, 20))
+    )
+    target = initial.replace('hello', 'goodbye').replace('ginkoid', 'ginky')
+    return (initial, target)
+```
+`hello` is replaced with `goodbye` and `ginkoid` is replaced with `ginky` a random number of times. So we just need to reverse that.
+
+```
+Initial string: ginkoidhelloginkoidhelloginkoidginkoidhelloginkoidhelloginkoidhellohellohelloginkoidhellohelloginkoid
+Target string: ginkygoodbyeginkygoodbyeginkyginkygoodbyeginkygoodbyeginkygoodbyegoodbyegoodbyeginkygoodbyegoodbyeginky
+```
+Looking at the first example, we see that very evidently.
+```
+Enter substitution of form "find => replace", 10 max: hello => goodbye
+Add another? (y/n) y
+Enter substitution of form "find => replace": ginkoid => ginky
+Add another? (y/n) n
+--------------------------------------------------------------------------------
+Testing substitutions...
+Level passed!
+```
+Ok, so that works, from now on, it gets a lot more complicated. As it can be seen, these first two are just direct replacements, in the future, these concepts build upon each other.
+
+Level 2 Solution:
+`hello => goodbye`
+`ginkoid => ginky`
+
+### Level 3
+
+```python
+def level_3():
+    return ('a' * randint(10, 100), 'a')
+```
+Looks easy right? This honestly took way too long from me. There are a number of random number of `a`'s (from 10 to 100) that we want to just get it to one `a`.
+
+`Initial string: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Target string: a`
+
+We know this program runs recursively as listed in the function `test_substitution`. We could brute force it so that every option from 10 to 100 `a`'s is replaced with just `a`. But we can't since the program only allows for 10 of such substitutions as `100-10` would require 90 substitutions so we need to find another way.
+
+This function works: `aa => a` because since this replacement runs recursively, it can slowly "delete" every extra `a`. 
+```
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaa
+aaaaaaa
+aaaa
+aa
+a
+```
+This logic makes sense because it just changes `aa` to `a` which basically "deletes" an `a`. This is an important concept for the future.
+
+Level 3 Solution:
+`aa => a`
+
+### Level 4
+```python
+def level_4():
+    return ('g' * randint(10, 100), 'ginkoid')
+```
+
+Ok, this is literally the same thing as the previous level except instead of using `a` in the initial they use `g` and instead of using `a` (again) in the target, they use `ginkoid`. So by logic using the same thing from the previous level it should be:
+`gg => g` 
+which makes:
+```
+ggggggggggggggggggggggggggggggggggggggggggg
+gggggggggggggggggggggg
+ggggggggggg
+gggggg
+ggg
+gg
+g
+```
+Ok, so that works, now we need to change that last `g` to become `ginkoid`. The problem with this is that we can't isolate the last `g`.
+Then if we enter `g => ginkoid` this is what happens.
+`gg => g` 
+`g => ginkoid`
+```
+ginkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoidinkoid
+```
+It enters an infinite loop that doesn't work because it loops the `g` of `ginkoid` messes up the deletion process of `gg => g`.
+Entering this:
+```
+gg => g
+g => binkoid
+```
+Returns:
+```
+ggggggggggggggggggg
+gggggggggg
+ggggg
+ggg
+gg
+g
+binkoid
+```
+This proves the deletion process of extra `g`'s is correct but `ginkoid` screws it up. So instead of deleting the `g`, we could just change it to `ginkoid` and then delete the extra `ginkoid`.
+So taking the previous attempt we put:
+```
+gg => ginkoid
+ginkoidginkoid => ginkoid
+```
+Returns:
+```
+ginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidg
+ginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidginkoidg
+ginkoidginkoidginkoidginkoidginkoidginkoidg
+ginkoidginkoidginkoidg
+ginkoidginkoidg
+ginkoidg
+```
+Counting the number of `g`'s in the initial string and we see that we got this to work on even numbers of `g`'s but not on odd numbers.
+Then lastly, we need to delete that extra `g` at the end so we should just add `ginkoidg => ginkoid`.
+
+Level 4 Solution:
+```
+gg => ginkoid
+ginkoidginkoid => ginkoid
+ginkoidg => ginkoid
+```
+
+### Level 5
+
+We need to check whether or not a binary palindrome is a palindrome or not. Also keep in mind that order starts becoming really important here.
+```
+Initial string: ^0000110010000111000000111100111100111100001111001111000011110011110011110000001110000100110000$
+Target string: palindrome
+
+Initial string: ^11010011000010100100001101100000111100000110000100001011$
+Target string: not_palindrome
+```
+
+Let's introduce a new concept here: Movement
+`1X => X1` moves x across a line of `1`'s.
+
+```
+X11111111
+1X1111111
+11X111111
+111X11111
+1111X1111
+11111X111
+111111X11
+1111111X1
+11111111X
+```
+
+Let's move the first digit to the last one to check if they are the same or not, this means palindrome, otherwise it's not.
+So we can "store" the first digit in a different format. `1` becomes `X` and `0` becomes `x`. And then move it to the end. The two string limits at the beginning and end are very important to this process, but right now differentiating between the two aren't important.
+```
+# differentiation not important
+^ => $
+# make 1 on both sides into X
+$1 => X
+1$ => X
+# make 0 on both sides into x
+$0 => x
+0$ => x
+```
+We then "walk/move" the left most digit to the right accounting for all posibilities.
+```
+X1 => 1X
+X0 => 0X
+x1 => 1x
+x0 => 0x
+```
+So basically if we have the combination `xX` or `Xx` we know it's not a palindrome then we can lock this in.
+```
+xX => not_palindrome
+Xx => not_palindrome
+```
+And if we have the combination `XX` or `xx` we know that it still might be a palindrome and need to keep looking so let's lock this in too.
+```
+XX => YZ
+xx => YZ
+```
+
+Then we can "walk" back `Y` to the beginning and leave the `Z` at the end.
+```
+0Y => Y0
+1Y => Y1
+```
+Once we walk back all the way, we can change it to `Z`.
+`Y => Z`
+If we change both sides back to `$`
+`Z => $`
+And (boom!) we started at the beginning again.
+So if we get back to `$$` then we know tested all possible cases and means it is a palindrome.
+`$$ => palindrome`
+This is the test:
+```
+011y010110z
+01y1010110z
+0y11010110z
+y011010110z
+z011010110z
+$011010110$
+x11010110$
+x1101011x
+1x101011x
+11x01011x
+110x1011x
+1101x011x
+11010x11x
+110101x1x
+1101011xx
+1101011yy
+1101011yz
+110101y1z
+11010y11z
+1101y011z
+110y1011z
+11y01011z
+1y101011z
+y1101011z
+z1101011z
+$1101011$
+X101011$
+X10101X
+1X0101X
+10X101X
+101X01X
+1010X1X
+10101XX
+10101YY
+10101YZ
+1010Y1Z
+101Y01Z
+10Y101Z
+1Y0101Z
+Y10101Z
+Z10101Z
+$10101$
+X0101$
+X010X
+0X10X
+01X0X
+010XX
+010YY
+010YZ
+01Y0Z
+0Y10Z
+Y010Z
+Z010Z
+$010$
+x10$
+x1x
+1xx
+1yy
+1yz
+y1z
+z1z
+$1$
+X$
+Y$
+Z$
+$$
+```
+However, if it's not a palindrome, we need to clear everything else out.
+```
+1not_palindrome => not_palindrome
+0not_palindrome => not_palindrome
+```
+Level 5 Solution:
+```
+^ => $
+$1 => X
+1$ => X
+$0 => x
+0$ => x
+X1 => 1X
+X0 => 0X
+x1 => 1x
+x0 => 0x
+xX => not_palindrome
+Xx => not_palindrome
+XX => YZ
+xx => YZ
+0Y => Y0
+1Y => Y1
+Y => Z
+Z => $
+$$ => palindrome
+1not_palindrome => not_palindrome
+0not_palindrome => not_palindrome
+```
+A total of 20 lines. Nice.
+
+### Level 6
+
+```
+Initial string: ^1011000+10001010=1011100010$
+Target string: incorrect
+Initial string: ^10011010+11011101=101110111$
+Target string: correct
+```
+We need to do addition. Easy. Read through the code, it should all make sense if you've followed along with the previous levels, it's just using the same concepts with different variable names.
+This is what is should look like in practice step by step:
+```
+^11111001+10100=100001101%^
+^1111100qX10100=100001101%^
+^1111100qX1010fx100001101%^
+^1111100q1X010fx100001101%^
+^1111100q10X10fx100001101%^
+^1111100q101X0fx100001101%^
+^1111100q1010Xfx100001101%^
+^1111100q1010Xf1x00001101%^
+^1111100q1010Xf10x0001101%^
+^1111100q1010Xf100x001101%^
+^1111100q1010Xf1000x01101%^
+^1111100q1010Xf10000x1101%^
+^1111100q1010Xf100001x101%^
+^1111100q1010Xf1000011x01%^
+^1111100q1010Xf10000110x1%^
+^1111100q1010Xf100001101x%^
+^1111100q1010fX100001101x%^
+^1111100q1010f1X00001101x%^
+^1111100q1010f10X0001101x%^
+^1111100q1010f100X001101x%^
+^1111100q1010f1000X01101x%^
+^1111100q1010f10000X1101x%^
+^1111100q1010f100001X101x%^
+^1111100q1010f1000011X01x%^
+^1111100q1010f10000110X1x%^
+
+...
+
+!101111101incorrectoooozo^
+!10111110incorrectoooozo^
+!1011111incorrectoooozo^
+!101111incorrectoooozo^
+!10111incorrectoooozo^
+!1011incorrectoooozo^
+!101incorrectoooozo^
+!10incorrectoooozo^
+!1incorrectoooozo^
+!incorrectoooozo^
+incorrectoooozo^
+incorrectooozo^
+incorrectoozo^
+incorrectozo^
+incorrectzo^
+incorrecto^
+incorrect^
+incorrect
+```
+
+### Level 6 Solution:
+```
+#test
+$ => %^
+
+#clear for incorrect
+!incorrect => incorrect
+0incorrect => incorrect
+1incorrect => incorrect
+incorrectz => incorrect
+incorrecto => incorrect
+incorrectc => incorrect
+incorrect^ => incorrect
+
+#do the binary math for t,o,z
+w%c => w%o
+zc => o
+oc => cz
+
+#walkback
+qP => +
+fE => =
+1P => P1
+0P => P0
+fP => Pf
+1E => E1
+0E => E0
+
+#accounting for extras on left side
+0+= => qfx
+1+= => qfX
+
+#if extras on right, make extras on left
+^a+=000 => !wm
+^a+=00 => !wm
+^a+=0 => !wm
+^a+= => !wm
+
+#send a messanger to %
+m1 => 1m
+m0 => 0m
+m%zzz => %
+m%zz => %
+m%z => %
+m% => %
+
+#% => @
+a+= => +=
+^+ => ^a+
+a+0 => 0a+
+a+1 => 1a+
+
+#initial
+1+ => qX
+1= => fX
+0+ => qx
+0= => fx
+
+#walk through
+X1 => 1X
+X0 => 0X
+x1 => 1x
+x0 => 0x
+Xf => fX
+xf => fx
+
+#calculate sum
+XX% => PE%cz
+xX% => PE%o
+Xx% => PE%o
+xx% => PE%z
+
+#for carries
+X% => PE%o
+x% => PE%z
+
+#when w, all the calculations are done, time to reverse the order
+0w0 => 00w
+0w1 => 10w
+1w0 => 01w
+1w1 => 11w
+w0 => 0w
+w1 => 1w
+
+#hit the back
+1w%o => b%
+0w%z => b%
+1w%z => incorrect
+0w%o => incorrect
+0b => b0
+1b => b1
+
+#b to w again
+!b => !w
+
+#their answer has too little
+!w%z => incorrect
+!w%c => incorrect
+!w%o => incorrect
+!w%^ => correct
+
+#their answer has too many
+1w%^ => incorrect
+0w%^ => incorrect
+
+```
+
+## Flag: 
+`flag{wtf_tur1n9_c0mpl3t3}`

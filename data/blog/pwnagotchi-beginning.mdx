@@ -1,0 +1,73 @@
+---
+title: 'Pwnagotchi Journey Beginning'
+date: '2024-08-19'
+tags: ['technical', 'network']
+draft: false
+summary: 'Pwnagotchi is an A2C-based “AI” powered by bettercap and running on a Raspberry Pi Zero W that learns from its surrounding WiFi environment in order to maximize the crackable WPA key material it captures.'
+---
+
+# Description
+
+> Pwnagotchi is an A2C-based “AI” powered by bettercap and running on a Raspberry Pi Zero W that learns from its surrounding WiFi environment in order to maximize the crackable WPA key material it captures.
+
+I hope that by implementing my own Pwnagotchi that I will learn more about WiFi network security from a red teaming perspective.
+
+My setup combines the versatility of the Raspberry Pi 3 Model B with additional hardware components such as a 2.13 inch black/white E-Ink V4 display by waveshare, a PCF8523 hardware clock by Adafruit, and a 7.4V/2000mAh power supply with UPS by SunFounder. 
+Running on Raspbian Lite, the system is also equipped with Pwnagotchi v1.5.5, enhancing its capabilities for security testing and monitoring.
+
+I'm using the Raspberry Pi 3 Model B from a headless state meaning that I connect to the RPi through SSH from another device connected to an RJ45 Ethernet cable.
+This saves us the need to allocate a monitor and other peripherals for accessing the Raspberry Pi. Now it almost acts as a local cloud server that can be accessed without the Internet.
+Lastly, the firmware I'm using the is the official evil-socket implementation of Pwnagotchi.
+
+## Eating WiFi handshakes
+
+[My Pwnagotchi Profile Page](https://pwnagotchi.ai/pwnfile/#!81fe343e2a8ec312c46dbeb6937557e24f86e5c9ab133cb3dbc977393904e715)
+
+Basically how the Pwnagotchi works is that it intercepts 4-way handshakes that devices use to initiate a connection with an Access Point. This means that we would have to have the perfect timing to intercept right as a device is connecting or have the Pwnagotchi running indefinitely in the background.
+Luckily, or unluckily, there's a work around for this. Since we know the protocols that those devices use to initiate a connection, we can use a deauthentication attack on those devices to kick them off the network, *forcing them to reconnect*! 
+This way, we don't have to wait for a naturally occurring connection to intiate, we can pull up whenever and just force devices to reconnect, capturing the 4-way handshakes.
+
+Another method the Pwnagotchi uses is a bit more active. Instead of passively sniffing traffic in the air, the Pwnagotchi directly sends an association frame, the third handshake in the sequence, to the access point hoping that the AP will leak some information about the PMKID, an ID for PMK, the encrypted wifi password.
+
+In addition to these 2 "automatic" modes of eating handshakes, the Pwnagotchi software adds an extra level of spice, AI, you gotta love it. This AI mode trains on the timings and channels that achieve the most edible handshakes from your environment. This allows the Pwnagotchi to become more efficient in it's approach to pwning networks.
+
+Note, the way that Pwnagotchi works and obvious hardware limitations, only networks with weak passwords and outdated software, like WPA1 and WPA2, can and will be be affected. And also note that cracking a router's password doesn't necessarily breach the entire network, there's more work to be done pivoting and escalating to better positions (unless, of course, the router's page isn't secure).
+
+Currently, I've been able to collect 52 AP's and I'm working on being able to crack them through either a local resource like hashcat or an online one like wpa-sec.
+
+### Raspberry Pi 3 Model B (mine) vs Zero W (default)
+
+Since the Pi 3b's micro-usb doesn't have a data wires, the only way to access it is through the massive Ethernet cable on the side. This also saves us the trouble of installing the RNDIS drivers that Windows needs to recognize the Pi Zero W as a network interface because Ethernet is obviously a network interface.
+
+The Pi 3b is so much *thicker* than the Pi Zero W which makes it look even more like a bomb and is super inconvenient for carrying around.
+
+The battery life is a lot shorter because of how power hungry the Pi 3b is, so instead of 150mA of power draw of the Pi 0W, Pi 3b sucks up 500 mA! This means that my thick Pwnagotchi only has a battery life of around 3 hours. But because it's so powerful, instead of having to wait for 10+ minutes for AI mode to load, it takes less than 2 minutes before everything is up and running.
+
+## Troubleshooting problems:
+
+### DNS Resolving
+
+DNS doesn't work. Try pinging `8.8.8.8`, Google's DNS server. If it works then add `nameserver 8.8.8.8` to `/etc/resolv.conf`. This is not a permanent solution as `dnsmasq.service` resets the file on boot.
+
+### Internet Sharing
+On Windows, if the Powershell script `win_connection_share.ps1` doesn't work even on administrator mode, go to Network Connections in Control Panel and find the usable internet connection. Right click, Properties, and share it with the Ethernet connection.
+
+If it says that the subnet is already being used, try connecting to another unused interface, disconnecting, and reconnecting to the Ethernet cable. I'm not exactly sure why that works so your mileage might vary and use at your own risk.
+
+### Waveshare 3 or higher
+
+So the officially supported repo by evil-socket has updated to include the newest version of waveshare, but it's not actually in the image. After installing and booting, make sure to pull the repo from GitHub.
+
+### Others Issues
+
+Originally I wanted to installing Linux on the Pi and build everything on top of that, essentially building Pwnagotchi from source, but I ran into a lot of issues from being unable to connect to internet (had to set locale first), Kali not booting for forever, and some Python depencies not building (wheel problem?) so I eventually just gave up for a while.
+
+Raspberry Pi
+
+### Unresolved issues:
+
+- Bluetooth tethering with mobile hotspot connects which can be seen from my phone but the Pi isn't about to access any of the internet.
+
+- Ethernet doesn't resolve to IPv4 even through manually settings, it only is able to connect through IPv6.
+
+- Pwnagotchi sometimes stops running while outside, just power cycle it, cause is unknown.
