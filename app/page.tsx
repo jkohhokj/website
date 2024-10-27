@@ -13,7 +13,7 @@ import '@/styles/glitch.css';
 
 
 
-export const current_projects = [
+const current_projects = [
     'Accelerating hardware for Post-Quantum Cryptography ⚡',
     'Training my first powerlifting split 💪',
     'Learning modern hip-hop 🕺',
