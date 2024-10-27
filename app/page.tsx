@@ -35,7 +35,7 @@ function Introduction(){
             <div className="flex text-slate-100 text-4xl">
                 <span>Hey</span>
                 <div className="w-14 h-10 animate-rotate">👋</div>
-                <span>I'm Jayden Koh!</span>
+                <span>I&apos;m Jayden Koh!</span>
             </div>
             <RandomFont text="and this is my website."/>
         </div>
@@ -109,8 +109,8 @@ function AboutMe(){
             <div className="prose outline outline-offset-1 outline-blue-600/35 rounded-xl">
             <div className="prose outline outline-offset-0 outline-blue-600/35 rounded-xl">
             <div className="text-center">
-                I'm a Computer Engineering student at Texas A&M University from Houston, TX.
-                I'm also a cybersecurity, embedded systems, and full stack enthusiast.
+                I&apos;m a Computer Engineering student at Texas A&M University from Houston, TX.
+                I&apos;m also a cybersecurity, embedded systems, and full stack enthusiast.
                 My hobbies include bouldering 🧗‍♂️, lifting 🏋️, folding origami 🦢, and playing CTFs 🚩.
             </div>
             </div>
@@ -122,7 +122,7 @@ function AboutMe(){
             <br/>
             <br/>
                 <div className="text-xl bg-gradient-to-r from-[#243A82] to-* rounded-lg">
-                    &nbsp; The last few weeks I've been busy with:
+                    &nbsp; The last few weeks I&apos;ve been busy with:
                     </div>
             <br/>
             <div className="mb-2 flex flex-wrap">
@@ -161,20 +161,20 @@ function AboutMe(){
 
 
 
-const PacificoComp = ({text}: Props) => {
-  return (
-    <>
-        <link
-        href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
-        rel="stylesheet"
-      />
-      <div className="text-6xl" style={{ fontFamily: 'Pacifico, cursive' }}>
-        {text}
-      </div>
+// const PacificoComp = ({text}: Props) => {
+//   return (
+//     <>
+//         <link
+//         href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+//         rel="stylesheet"
+//       />
+//       <div className="text-6xl" style={{ fontFamily: 'Pacifico, cursive' }}>
+//         {text}
+//       </div>
 
-    </>
-  );
-};
+//     </>
+//   );
+// };
 
 
 export default function Home() {

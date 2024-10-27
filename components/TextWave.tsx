@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 interface Props{
     text: string;
 }
 
 const CharacterSpans: React.FC<Props> = ({text}) => {
-  const [inputText, setInputText] = useState(text);
+  const [inputText] = useState(text);
 
   const createCharacterSpans = (text: string) => {
     return Array.from(text).map((char, index) => (

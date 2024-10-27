@@ -24,13 +24,13 @@ function getTheme(): boolean {
   }
 
   // Toggles the theme between dark and light mode
-  const toggleTheme = () => {
-    setIsDark((prev) => {
-      const newTheme = !prev;
-      setTheme(newTheme);
-      return newTheme;
-    });
-  };
+//   const toggleTheme = () => {
+//     setIsDark((prev) => {
+//       const newTheme = !prev;
+//       setTheme(newTheme);
+//       return newTheme;
+//     });
+//   };
 
   useEffect(() => {
     if (loadingRef.current) {
