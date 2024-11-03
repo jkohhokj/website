@@ -51,12 +51,12 @@ function CurrentInterests(){
         <div className="container py-12">
           <div className="-m-4 flex flex-wrap">
             {interestsData.map((d) => (
-              <SmallCard
+                <SmallCard
                 key = {d.title}
                 title={d.title}
                 description={d.description}
-                href="https://www.google.com"
-              />
+                href={d.href}
+                />
             ))}
           </div>
         </div>
@@ -231,7 +231,7 @@ export default function Home() {
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="/files/Resume-Spring-2024.17.pdf"
+          href={authorData.resume}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -246,7 +246,7 @@ export default function Home() {
         </a>
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://github.com/jkohhokj/personal-website"
+          href={authorData.source}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -261,7 +261,7 @@ export default function Home() {
         </a>
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://blog.jkoh.dev/blog"
+          href={authorData.blog}
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -1,15 +1,5 @@
-interface Author {
-  name: string,
-  occupation: string,
-  company: string,
-  imgSrc: string,
-  mail: string,
-  github: string,
-  linkedin: string,
-  resume: string,
-}
 
-export const authorData: Author = 
+export const authorData: { [key: string]: string } = 
     {
         name: 'Jayden Koh',
         occupation: 'Computer Engineering Student',
@@ -18,6 +8,9 @@ export const authorData: Author =
         mail: 'jkohhokj@gmail.com',
         github: 'https://www.github.com/jkohhokj',
         linkedin: 'https://www.linkedin.com/in/jkohhokj',
-        resume: '/files/Resume-Spring-2024.17.pdf'
+        resume: '/files/Resume-Spring-2024.18.pdf',
+        source: 'https://www.github.com/jkohhokj/website',
+        blog: 'https://blog.jkoh.dev'
+
 
     }

@@ -7,25 +7,51 @@ interface Project {
 
 interface Topic{
     title: string,
-    description: string
+    description: string,
+    href: string
 }
 
 export const interestsData: Topic[] = [
     {
-        title: 'Software Security',
-        description: 'CTFs',
+        title: 'Digital Forensics',
+        description: 'Solving digital forensics CTF challenges which include network logs, drive images, crash dumps, and image recovery.',
+        href: 'https://blog.jkoh.dev/tags'
     },
     {
         title: 'Hardware Security',
-        description: 'Hard',
+        description: 'Post-Quantum Cryptography implementation with CRYSTALS-Dilithium and CRYTALS-Kyber on FPGAs.',
+        href: 'https://www.google.com'
     },
     {
-        title: 'Cryptography',
-        description: 'PQC', 
+        title: 'Computer Science',
+        description: 'Implementing common STL containers in C++ including UnorderedMap, PriorityQueue, Binary Search Tree, and Lists.',
+        href: ''
+    },
+    {
+        title: 'Digital System Design',
+        description: 'Implementing common digital designs including multiplexors, priority encoders, and D flip-flops at both gate-level and RTL in Vivado.',
+        href: ''
+    },
+    {
+        title: 'Powerlifting',
+        description:
+`
+Lift PRs (lbs):
+Deadlift: 395
+Squat: 355
+Bench: 255
+`,
+        href: 'https://www.instagram.com/jkoh.jimbro'
     },
     {
         title: 'Weightlifting',
-        description: 'heavy shit',
+        description: 
+`Lift PRs (kgs):
+Front Squat: 125 
+Clean: 110
+C&J: 100
+Snatch: 80`,
+        href: 'https://www.instagram.com/jkoh.jimbro'
     }
 
 ]
