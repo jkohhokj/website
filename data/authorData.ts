@@ -1,4 +1,6 @@
 
+const resumeVersion: string = '18';
+
 export const authorData: { [key: string]: string } = 
     {
         name: 'Jayden Koh',
@@ -8,7 +10,7 @@ export const authorData: { [key: string]: string } =
         mail: 'jkohhokj@gmail.com',
         github: 'https://www.github.com/jkohhokj',
         linkedin: 'https://www.linkedin.com/in/jkohhokj',
-        resume: '/files/Resume-Spring-2024.18.pdf',
+        resume: '/files/Resume\ Spring\ 2024.'+resumeVersion+'.pdf',
         source: 'https://www.github.com/jkohhokj/website',
         blog: 'https://blog.jkoh.dev'
 
