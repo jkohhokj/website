@@ -13,8 +13,8 @@ interface Topic{
 
 export const interestsData: Topic[] = [
     {
-        title: 'Digital Forensics',
-        description: 'Solving digital forensics CTF challenges which include network logs, drive images, crash dumps, and image recovery.',
+        title: 'Blockchain Security',
+        description: 'Solving CTE challenges from Ethernaut, Damn Vulnerable DeFi, and MrStealYoCrypto.',
         href: 'https://blog.jkoh.dev/tags'
     },
     {
