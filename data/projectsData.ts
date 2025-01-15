@@ -18,6 +18,11 @@ export const interestsData: Topic[] = [
         href: 'https://blog.jkoh.dev/tags'
     },
     {
+        title: 'LangGuessr!',
+        description: 'I created a language guessing game inspired by GeoGuessr! that pulls Wikipedia articles in 100+ random languages.',
+        href: 'https://lang-guessr.vercel.app/'
+    },
+    {
         title: 'Hardware Security',
         description: 'Post-Quantum Cryptography implementation with CRYSTALS-Dilithium and CRYTALS-Kyber on FPGAs.',
         href: 'https://www.google.com'
