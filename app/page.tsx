@@ -237,7 +237,7 @@ export default function Home() {
         >
           <Image
             aria-hidden
-            src="https://nextjs.org/icons/file.svg"
+            src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Icon-txt.svg"
             alt="File icon"
             width={16}
             height={16}
@@ -252,7 +252,7 @@ export default function Home() {
         >
           <Image
             aria-hidden
-            src="https://nextjs.org/icons/window.svg"
+            src="https://upload.wikimedia.org/wikipedia/commons/8/87/VisualEditor_-_Icon_-_Code.svg"
             alt="Window icon"
             width={16}
             height={16}
@@ -267,7 +267,7 @@ export default function Home() {
         >
           <Image
             aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Globe_icon.svg/630px-Globe_icon.svg.png"
             alt="Globe icon"
             width={16}
             height={16}
