@@ -8,6 +8,7 @@ import RandomFont from "@/components/RandomFont";
 import Header from "@/components/Header";
 import SmallCard from "@/components/SmallCard";
 import AnimatedText from "@/components/TextWave";
+import { Code, Rss, FileUser } from 'lucide-react';
 
 import '@/styles/glitch.css';
 
@@ -235,13 +236,14 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
+          <FileUser color="white" size={36} />
+          {/* <Image
             aria-hidden
             src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Icon-txt.svg"
             alt="File icon"
             width={16}
             height={16}
-          />
+          /> */}
           Resume
         </a>
         <a
@@ -250,13 +252,14 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
+          <Code color="white" size={36} />
+          {/* <Image
             aria-hidden
             src="https://upload.wikimedia.org/wikipedia/commons/8/87/VisualEditor_-_Icon_-_Code.svg"
             alt="Window icon"
             width={16}
             height={16}
-          />
+          /> */}
           Source Code
         </a>
         <a
@@ -265,13 +268,14 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
+          <Rss color="white" size={36} />
+          {/* <Image
             aria-hidden
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Globe_icon.svg/630px-Globe_icon.svg.png"
             alt="Globe icon"
             width={16}
             height={16}
-          />
+          /> */}
           Blog
         </a>
       </footer>
