@@ -1,3 +1,5 @@
+import { authorData } from "./authorData";
+
 interface NavLink {
   href: string;
   title: string;
@@ -5,6 +7,8 @@ interface NavLink {
 
 const headerNavLinks: NavLink[] = [
   { href: '/', title: 'Home' },
+  { href: '/contact', title: 'Contact' },
+  { href: authorData.resume, title: 'Resume' },
   { href: 'https://blog.jkoh.dev', title: 'Blog' },
 
 ]
