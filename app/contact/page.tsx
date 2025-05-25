@@ -44,7 +44,7 @@ function AboutMe() {
         <div>
           <a
             className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-            href={`mailto:${authorData.github}`}
+            href={`${authorData.github}`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -54,7 +54,7 @@ function AboutMe() {
         <div>
           <a
             className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-            href={`mailto:${authorData.linkedin}`}
+            href={`${authorData.linkedin}`}
             target="_blank"
             rel="noopener noreferrer"
           >
