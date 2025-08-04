@@ -32,7 +32,8 @@ export const interestsData: Topic[] = [
   },
   {
     title: "Computer Architecture & Design",
-    description: "Exploring RTL in Verilog and ARM Assembly to optimize performance, power, and price.",
+    description:
+      "Exploring RTL in Verilog and ARM Assembly to optimize performance, power, and price.",
     href: "https://engineering.tamu.edu/electrical/academics/degrees/graduate/phd-qualifying-exams/ecen350.html",
   },
   {
@@ -57,33 +58,40 @@ Snatch: 80`,
 ];
 
 export const projectsData: Project[] = [
-    {
-    title: "Post-Quantum Cryptography 🔒",
+  {
+    title: "Hardware Security Fuzzing Research ⚙️",
+    description: `Hardware vulnerabilities in processors are emerging at an alarming rate while current security measures struggle to keep up.
+    Over my summer internship with SETH Lab, I discover 6 zero-day hardware vulnerabilities in open-source processors.`,
+    imgSrc: "/images/hardware_fuzzing_cover.png",
+    href: "https://blog.jkoh.dev/blog/hardware-fuzzing",
+  },
+  {
+    title: "Post-Quantum Cryptography Research 🔒",
     description: `As quantum computers become stronger, our current cryptographic infrastructure weakens.
     Under Prof. JV I research the emerging technology of PQC and its implementation across various hardware applications.`,
     imgSrc: "/images/pqc_cover.png",
     href: "https://blog.jkoh.dev/blog/pqc",
   },
-    {
-    title: "Computer Security Rankings 🥇",
+  {
+    title: "Computer Security Rankings Project 🥇",
     description: `Dissatisifed with the rankings on CSrankings.org for Computer Security, I set out to create the most comprehensive computer security rankings list from the top three conferences: USENIX, S&P, and CCS.`,
     imgSrc: "/images/security_ranking_cover.png",
     href: "https://comsec-rankings.jkoh.dev/",
   },
-    {
+  {
     title: "LangGuessr! Game 💬",
     description: `Ever played GeoGuessr but for languages? Behold LangGuessr, the realistic language guessing game.
     Here I describe the methodology used to create a game that gathers representative, human-written text across 300 languages.`,
     imgSrc: "/images/langguessr_cover.png",
     href: "https://lang-guessr.vercel.app/",
   },
-    {
-    title: "Ethernaut Solidity CTF Challenges 🚩",
+  {
+    title: "Ethernaut Solidity CTF Challenge Writeups 🚩",
     description: `Ethernaut is a training ground for practicing Solidity security skills. Here are my writeups for each challenge with Remix and how I reached the top 2% of accounts.`,
     imgSrc: "/images/ethernaut_cover.png",
     href: "https://blog.jkoh.dev/blog/ethernaut",
   },
-    {
+  {
     title: "Midnight Blockchain Hackathon Winner 🕛",
     description: `Midnight is a blockchain technology that leverages the privacy of blockchains with the transparency of open-source. 
     Here's how my team won the "Best Use of Midnight" during our hackathon season with our decentralized voting platform.`,
@@ -91,14 +99,14 @@ export const projectsData: Project[] = [
     href: "https://devpost.com/software/silent-vote",
   },
   {
-    title: "Pwnagotchi WiFi Hacking on Raspberry Pi 🛜",
+    title: "Pwnagotchi WiFi Hacking on Raspberry Pi Project 🛜",
     description: `Pwnagotchi is an A2C-based network-pwning "AI" discrete enough to run on a Raspberry Pi.
     Here I set up my very own WiFi handshaker pet and record my struggles and successes.`,
     imgSrc: "/images/pwnagotchi_cover.jpg",
     href: "https://blog.jkoh.dev/blog/pwnagotchi-beginning",
   },
   {
-    title: "Learning Zig 🦎",
+    title: "Learning Zig Project 🦎",
     description: `With Rust and Zig competing to replace C in critical software, I'm joining the hype train on learning new programming languages.
     This is my progress of learning and developing with Zig for almost a year.`,
     imgSrc: "/images/zig_logo.png",
