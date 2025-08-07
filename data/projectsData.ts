@@ -63,7 +63,7 @@ export const projectsData: Project[] = [
     description: `Hardware vulnerabilities in processors are emerging at an alarming rate while current security measures struggle to keep up.
     Over my summer internship with SETH Lab, I discover 6 zero-day hardware vulnerabilities in open-source processors.`,
     imgSrc: "/images/hardware_fuzzing_cover.png",
-    href: "https://blog.jkoh.dev/blog/hardware-fuzzing",
+    href: "https://hardware-fuzz.jkoh.dev/blog/summer25_jayden",
   },
   {
     title: "Post-Quantum Cryptography Research 🔒",
