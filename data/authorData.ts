@@ -1,5 +1,4 @@
 
-const resumeVersion: string = '1';
 
 export const authorData: { [key: string]: string } = 
     {
