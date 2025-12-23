@@ -59,6 +59,24 @@ Snatch: 80`,
 
 export const projectsData: Project[] = [
   {
+    title:"PHIL 240: Deductive Logic Course 📚",
+    description: `In Progress...`,
+    imgSrc: "",
+    href: "",
+  },
+  {
+    title:"TAMU Cohort in Hardware Security Research 🌐",
+    description: `In Progress...`,
+    imgSrc: "",
+    href: "",
+  },
+  {
+    title:"Solana MCP Project 🚀",
+    description: `In Progress...`,
+    imgSrc: "",
+    href: "",
+  },
+  {
     title: "Hardware Security Fuzzing Research ⚙️",
     description: `Hardware vulnerabilities in processors are emerging at an alarming rate while current security measures struggle to keep up.
     Over my summer internship with SETH Lab, I discover 6 zero-day hardware vulnerabilities in open-source processors.`,
