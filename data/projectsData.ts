@@ -61,20 +61,20 @@ export const projectsData: Project[] = [
   {
     title:"PHIL 240: Deductive Logic Course 📚",
     description: `In Progress...`,
-    imgSrc: "",
-    href: "",
+    imgSrc: "/images/phil240_cover.png",
+    href: "https://blog.jkoh.dev/blog/phil-240",
   },
   {
     title:"TAMU Cohort in Hardware Security Research 🌐",
     description: `In Progress...`,
     imgSrc: "",
-    href: "",
+    href: "https://blog.jkoh.dev/blog/solana-mcp",
   },
   {
     title:"Solana MCP Project 🚀",
     description: `In Progress...`,
-    imgSrc: "",
-    href: "",
+    imgSrc: "/images/solana_mcp_cover.png",
+    href: "https://blog.jkoh.dev/blog/solana-mcp",
   },
   {
     title: "Hardware Security Fuzzing Research ⚙️",
