@@ -198,7 +198,7 @@ export default function Home() {
                   <ExternalAnchor href="https://github.com/SinnQuant/sinnfund-infra" className="inline-flex items-center gap-2 text-sm font-semibold text-[#a34b2d] hover:text-[#84371e]"><Github size={16} /> Source repository <ArrowUpRight size={16} /></ExternalAnchor>
 
 <ExternalAnchor
-  href="YOUR_ENGINEERING_JOURNAL_URL"
+  href="https://github.com/SinnQuant/sinnfund-infra/tree/main/docs/journal"
   className="inline-flex items-center gap-2 text-sm font-semibold text-[#a34b2d] hover:text-[#84371e]"
 >
   <BookOpen size={16} />
