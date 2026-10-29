@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowRight, ArrowUpRight, CircuitBoard, ExternalLink, FileText, Github, Linkedin, Mail, Terminal, Workflow } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, CircuitBoard, ExternalLink, FileText, Github, Linkedin, Mail, Terminal, Workflow } from "lucide-react";
 import Link from "next/link";
 import { authorData } from "@/data/authorData";
 
@@ -120,7 +120,7 @@ export default function Home() {
           <section aria-label="Selected engineering results" className="grid gap-px overflow-hidden rounded-xl border border-[#ded8cd] bg-[#e7e0d4] sm:grid-cols-2">
             {[
               ["6", "RISC-V security bugs found", "Research with SETH Lab"],
-              ["2×", "Hardware fuzzing coverage on RISC-V cores", "Compared with DiFuzzRTL"],
+              ["2×", "Hardware fuzzing coverage on RISC-V cores", "Compared with TheHuzz USENIX 2022"],
             ].map(([metric, caption, detail]) => <div key={metric} className="bg-[#fffdfa] p-6 sm:p-7"><p className="text-3xl font-semibold tracking-tight text-[#1c2923]">{metric}</p><p className="mt-2 text-sm font-medium text-[#29362e]">{caption}</p><p className="mt-1 text-xs text-[#657168]">{detail}</p></div>)}
           </section>
 
@@ -183,11 +183,29 @@ export default function Home() {
               <div className="flex flex-col p-7 sm:p-8">
                 <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-[#a34b2d]"><span>Student investment fund</span><span className="text-[#777e74]">/</span><span>Systems · Full-stack</span></div>
                 <h3 className="mt-3 text-2xl font-semibold tracking-tight text-[#1c2923]">SinnFund — Investment Platform</h3>
-                <p className="mt-3 flex-1 text-sm leading-7 text-[#58645c]">Lead infrastructure and web integration for a student-run investment platform. The system connects scheduled brokerage-report ingestion, market-data APIs, and portfolio visibility for fund members. Work also includes operational tooling and trade-workflow integration.</p>
+
+<p className="mt-3 flex-1 text-sm leading-7 text-[#58645c]">
+  Lead infrastructure and web integration for a student-run investment platform,
+  connecting automated brokerage-report ingestion, market-data APIs, and portfolio
+  visibility. Systematize deployment and operations across AWS and Texas A&amp;M
+  cloud infrastructure, while maintaining engineering journals, technical
+  documentation, and standardized operational workflows to support team continuity
+  and reliable system maintenance.
+</p>
                 <div className="mt-6 flex flex-wrap gap-2 font-mono text-xs text-[#46544b]"><span className="rounded border border-[#ded8cd] px-2 py-1">Python</span><span className="rounded border border-[#ded8cd] px-2 py-1">Linux / systemd</span><span className="rounded border border-[#ded8cd] px-2 py-1">APIs</span><span className="rounded border border-[#ded8cd] px-2 py-1">Web infrastructure</span></div>
                 <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
                   <ExternalAnchor href="https://sinnfund.jkoh.dev" className="inline-flex items-center gap-2 text-sm font-semibold text-[#a34b2d] hover:text-[#84371e]">Visit SinnFund website <ExternalLink size={16} /></ExternalAnchor>
                   <ExternalAnchor href="https://github.com/SinnQuant/sinnfund-infra" className="inline-flex items-center gap-2 text-sm font-semibold text-[#a34b2d] hover:text-[#84371e]"><Github size={16} /> Source repository <ArrowUpRight size={16} /></ExternalAnchor>
+
+<ExternalAnchor
+  href="YOUR_ENGINEERING_JOURNAL_URL"
+  className="inline-flex items-center gap-2 text-sm font-semibold text-[#a34b2d] hover:text-[#84371e]"
+>
+  <BookOpen size={16} />
+  Engineering Journal
+  <ArrowUpRight size={16} />
+</ExternalAnchor>
+
                 </div>
               </div>
             </article>
