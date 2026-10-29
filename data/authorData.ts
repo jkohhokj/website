@@ -9,7 +9,7 @@ export const authorData: { [key: string]: string } =
         mail: 'jkohhokj@gmail.com',
         github: 'https://www.github.com/jkohhokj',
         linkedin: 'https://www.linkedin.com/in/jkohhokj',
-        resume: '/files/Resume_2025_8.pdf',
+        resume: '/files/Resume_2026_3.pdf',
         source: 'https://www.github.com/jkohhokj/website',
         blog: 'https://blog.jkoh.dev'
 
