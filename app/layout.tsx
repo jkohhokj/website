@@ -14,20 +14,25 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Jayden Koh",
-  description: "My Personal Website",
+  metadataBase: new URL("https://www.jkoh.dev"),
+  title: "Jayden Koh | RISC-V, FPGA & Hardware Verification",
+  description:
+    "Jayden Koh is a Texas A&M computer engineering student working on RISC-V, FPGA design, hardware verification, embedded systems, and processor security.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "https://www.jkoh.dev",
+    title: "Jayden Koh | Hardware & Systems Engineering",
+    description: "RISC-V · FPGA · RTL Verification · Embedded Systems",
+    siteName: "Jayden Koh",
+  },
+  twitter: { card: "summary", title: "Jayden Koh | Hardware & Systems Engineering" },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
     </html>
