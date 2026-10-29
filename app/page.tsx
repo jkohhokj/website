@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, CircuitBoard, ExternalLink, FileText, Github, Linkedin, Mail, Terminal, Workflow } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ArrowUpRight, CircuitBoard, ExternalLink, FileText, Github, Linkedin, Mail, Terminal, Workflow } from "lucide-react";
 import Link from "next/link";
 import { authorData } from "@/data/authorData";
 
@@ -10,7 +10,7 @@ const experience = [
     detail: "Year-round research internship. Project details are not publicly disclosed.",
   },
   {
-    period: "2026 — present",
+    period: "2026",
     company: "Rev Silicon",
     role: "ASIC Design Verification",
     detail: "Formal and functional design verification of an AI accelerator ASIC being prepared for tapeout. Working on RTL correctness without disclosing implementation details.",
@@ -163,7 +163,10 @@ export default function Home() {
                   <h3 className="mt-3 text-2xl font-semibold tracking-tight text-[#1c2923]">Coverage-guided RISC-V fuzzing</h3>
                   <p className="mt-3 flex-1 text-sm leading-7 text-[#58645c]">Investigated security bugs in open-source RISC-V processors, combining architectural understanding with simulation and guided test generation. Research yielded six bugs and 2× coverage compared with a prior fuzzing baseline.</p>
                   <div className="mt-6 flex flex-wrap gap-2 font-mono text-xs text-[#46544b]"><span className="rounded border border-[#ded8cd] px-2 py-1">RISC-V</span><span className="rounded border border-[#ded8cd] px-2 py-1">RTL simulation</span><span className="rounded border border-[#ded8cd] px-2 py-1">Hardware fuzzing</span></div>
-                  <ExternalAnchor href="https://hardware-fuzz.jkoh.dev/blog/summer25_jayden" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#a34b2d] transition group-hover:gap-3">Read public research notes <ArrowUpRight size={16} /></ExternalAnchor>
+                  <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+                    <Link href="/projects/rsd-rtl-verification" className="inline-flex items-center gap-2 text-sm font-semibold text-[#a34b2d] transition group-hover:gap-3">Explore RSD findings <ArrowUpRight size={16} /></Link>
+                    <ExternalAnchor href="https://hardware-fuzz.jkoh.dev/blog/summer25_jayden" className="inline-flex items-center gap-2 text-sm font-semibold text-[#a34b2d] hover:text-[#84371e]">Research notes <ExternalLink size={16} /></ExternalAnchor>
+                  </div>
                 </div>
               </article>
             </div>
@@ -183,30 +186,30 @@ export default function Home() {
               <div className="flex flex-col p-7 sm:p-8">
                 <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-[#a34b2d]"><span>Student investment fund</span><span className="text-[#777e74]">/</span><span>Systems · Full-stack</span></div>
                 <h3 className="mt-3 text-2xl font-semibold tracking-tight text-[#1c2923]">SinnFund — Investment Platform</h3>
-
-<p className="mt-3 flex-1 text-sm leading-7 text-[#58645c]">
-  Lead infrastructure and web integration for a student-run investment platform,
-  connecting automated brokerage-report ingestion, market-data APIs, and portfolio
-  visibility. Systematize deployment and operations across AWS and Texas A&amp;M
-  cloud infrastructure, while maintaining engineering journals, technical
-  documentation, and standardized operational workflows to support team continuity
-  and reliable system maintenance.
-</p>
+                <p className="mt-3 flex-1 text-sm leading-7 text-[#58645c]">Lead infrastructure and web integration for a student-run investment platform, connecting automated brokerage-report ingestion, market-data APIs, and portfolio visibility. Systematize deployment and operations across AWS and Texas A&amp;M cloud infrastructure, while maintaining engineering journals, technical documentation, and standardized operational workflows to support team continuity and reliable system maintenance.</p>
                 <div className="mt-6 flex flex-wrap gap-2 font-mono text-xs text-[#46544b]"><span className="rounded border border-[#ded8cd] px-2 py-1">Python</span><span className="rounded border border-[#ded8cd] px-2 py-1">Linux / systemd</span><span className="rounded border border-[#ded8cd] px-2 py-1">APIs</span><span className="rounded border border-[#ded8cd] px-2 py-1">Web infrastructure</span></div>
                 <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
                   <ExternalAnchor href="https://sinnfund.jkoh.dev" className="inline-flex items-center gap-2 text-sm font-semibold text-[#a34b2d] hover:text-[#84371e]">Visit SinnFund website <ExternalLink size={16} /></ExternalAnchor>
+                  <ExternalAnchor href="https://github.com/SinnQuant/sinnfund-infra/tree/main/docs/journal" className="inline-flex items-center gap-2 text-sm font-semibold text-[#a34b2d] hover:text-[#84371e]"><FileText size={16} /> Engineering journal <ArrowUpRight size={16} /></ExternalAnchor>
                   <ExternalAnchor href="https://github.com/SinnQuant/sinnfund-infra" className="inline-flex items-center gap-2 text-sm font-semibold text-[#a34b2d] hover:text-[#84371e]"><Github size={16} /> Source repository <ArrowUpRight size={16} /></ExternalAnchor>
-
-<ExternalAnchor
-  href="https://github.com/SinnQuant/sinnfund-infra/tree/main/docs/journal"
-  className="inline-flex items-center gap-2 text-sm font-semibold text-[#a34b2d] hover:text-[#84371e]"
->
-  <BookOpen size={16} />
-  Engineering Journal
-  <ArrowUpRight size={16} />
-</ExternalAnchor>
-
                 </div>
+              </div>
+            </article>
+            <article className="mt-5 grid overflow-hidden rounded-xl border border-[#ded8cd] bg-[#fffdfa] shadow-sm transition hover:border-[#a34b2d]/45 hover:shadow-md lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+              <div className="flex min-h-64 flex-col justify-center gap-3 border-b border-[#ded8cd] bg-[#f0ebe2] p-7 lg:border-b-0 lg:border-r" aria-label="RSD findings overview">
+                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#a34b2d]">RSD / ISA conformance</p>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-lg border border-[#d6cec0] bg-[#fffdfa] p-4"><p className="text-3xl font-semibold text-[#1c2923]">4</p><p className="mt-2 text-xs leading-5 text-[#58645c]">FP status and context-state findings</p></div>
+                  <div className="rounded-lg border border-[#d6cec0] bg-[#fffdfa] p-4"><p className="text-3xl font-semibold text-[#1c2923]">2</p><p className="mt-2 text-xs leading-5 text-[#58645c]">CSR privilege and access findings</p></div>
+                </div>
+                <div className="rounded-lg border border-[#a34b2d]/30 bg-[#a34b2d]/[0.07] px-4 py-3 font-mono text-xs text-[#703923]">ISA rule → directed test → RTL trace → finding</div>
+              </div>
+              <div className="flex flex-col p-7 sm:p-8">
+                <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-[#a34b2d]"><span>SETH Lab research</span><span className="text-[#777e74]">/</span><span>RTL verification evidence</span></div>
+                <h3 className="mt-3 text-2xl font-semibold tracking-tight text-[#1c2923]">RSD RISC-V verification findings</h3>
+                <p className="mt-3 flex-1 text-sm leading-7 text-[#58645c]">Technical investigation of six reported ISA-conformance findings in the RSD out-of-order processor. Compared RISC-V architectural rules with RTL simulation evidence, focusing on floating-point context state, CSR privilege checks, and exception handling. These are the findings associated with the processor fuzzing research above, not additional discoveries.</p>
+                <div className="mt-6 flex flex-wrap gap-2 font-mono text-xs text-[#46544b]"><span className="rounded border border-[#ded8cd] px-2 py-1">RISC-V Privileged ISA</span><span className="rounded border border-[#ded8cd] px-2 py-1">Directed testing</span><span className="rounded border border-[#ded8cd] px-2 py-1">RTL traces</span><span className="rounded border border-[#ded8cd] px-2 py-1">Technical reports</span></div>
+                <Link href="/projects/rsd-rtl-verification" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#a34b2d] transition hover:text-[#84371e]">Read the six-finding overview <ArrowUpRight size={16} /></Link>
               </div>
             </article>
             <div className="mt-5 grid gap-5 md:grid-cols-2">
@@ -249,3 +252,4 @@ export default function Home() {
     </div>
   );
 }
+

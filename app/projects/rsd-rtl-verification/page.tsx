@@ -1,6 +1,4 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, ExternalLink, FileText, Github } from "lucide-react";
+import type { Metadata } from "next"; import Link from "next/link"; import { ArrowLeft, ArrowUpRight, ExternalLink, FileText, Github } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "RSD RISC-V RTL Verification Findings | Jayden Koh",
@@ -8,9 +6,7 @@ export const metadata: Metadata = {
     "Technical overview of six reported RTL verification findings in the RSD out-of-order RISC-V processor, including floating-point architectural state and CSR privilege checking.",
 };
 
-// Set NEXT_PUBLIC_RSD_REPORTS_URL in your deployment to the approved, public
-// repository containing the sanitized reports. Do not link private reports.
-const reportsRepositoryUrl = process.env.NEXT_PUBLIC_RSD_REPORTS_URL;
+const reportsRepositoryUrl = "https://github.com/jkohhokj/riscv-rtl-verification";
 
 const findings = [
   {
